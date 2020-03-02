@@ -6,12 +6,12 @@ public interface UserService {
 	
 	public List<UserModel> listUsers();
 	
-	public UserModel findUserByUserName(char userName);
+	public UserModel findUserByUserName(String userName);
 	
 	public UserModel addUser(UserModel user);
 	
 	public UserModel updateUser(UserModel user);
 	
-	public void deleteUser(int id);
+	public void deleteUser(Long id);
 
 }

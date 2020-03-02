@@ -1,5 +1,7 @@
 package com.novoprojeto.projetoooO.model;
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,26 +16,26 @@ public class StoryModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@Column(name = "message")
 	private String message;
 	
 	@NotNull
 	@Column(name = "idOwner")
-	private long idOwner;
+	private Long idOwner;
 	
 	@NotNull
 	@Column(name = "postDate")
-	private Date postDate;
+	private LocalDateTime postDate;
 	
-	// type tinyint
+
 
 	public StoryModel() {
 		
 	}
 
-	public StoryModel(long id, String message, long idOwner, Date postDate) {
+	public StoryModel(long id, String message, long idOwner, LocalDateTime postDate) {
 		super();
 		this.id = id;
 		this.message = message;
@@ -41,11 +43,11 @@ public class StoryModel {
 		this.postDate = postDate;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -57,19 +59,19 @@ public class StoryModel {
 		this.message = message;
 	}
 
-	public long getIdOwner() {
+	public Long getIdOwner() {
 		return idOwner;
 	}
 
-	public void setIdOwner(long idOwner) {
+	public void setIdOwner(Long idOwner) {
 		this.idOwner = idOwner;
 	}
 
-	public Date getPostDate() {
+	public LocalDateTime getPostDate() {
 		return postDate;
 	}
 
-	public void setPostDate(Date postDate) {
+	public void setPostDate(LocalDateTime postDate) {
 		this.postDate = postDate;
 	}
 }

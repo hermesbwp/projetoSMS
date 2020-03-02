@@ -20,7 +20,7 @@ public class UserModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 20)
@@ -48,12 +48,13 @@ public class UserModel {
 	private ContactsModel userContact;
 	
 	//as mensagens do usuario
+	
 
 	public UserModel() {
 		
 	}
 
-	public UserModel(long id, @Size(max = 20) String userName, @Size(max = 200) String password,
+	public UserModel(Long id, @Size(max = 20) String userName, @Size(max = 200) String password,
 			@Size(max = 200) String email, ProfileModel userProfile) {
 		super();
 		this.id = id;
@@ -63,11 +64,11 @@ public class UserModel {
 		this.userProfile = userProfile;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

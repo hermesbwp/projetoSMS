@@ -18,15 +18,15 @@ public class MessageModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(name = "idScr")
-	private long idScr;
+	private Long idScr;
 
 	@NotNull
 	@Column(name = "idDst")
-	private long idDst;
+	private Long idDst;
 	
 	@NotNull
 	@Size(max =200)
@@ -51,7 +51,7 @@ public class MessageModel {
 		
 	}
 
-	public MessageModel(long id, long idScr, long idDst, @Size(max = 200) String message, int statusScr, int statusDst,
+	public MessageModel(Long id, Long idScr, Long idDst, @Size(max = 200) String message, int statusScr, int statusDst,
 			LocalDateTime date) {
 		super();
 		this.id = id;
@@ -63,27 +63,27 @@ public class MessageModel {
 		this.date = date;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getIdScr() {
+	public Long getIdScr() {
 		return idScr;
 	}
 
-	public void setIdScr(long idScr) {
+	public void setIdScr(Long idScr) {
 		this.idScr = idScr;
 	}
 
-	public long getIdDst() {
+	public Long getIdDst() {
 		return idDst;
 	}
 
-	public void setIdDst(long idDst) {
+	public void setIdDst(Long idDst) {
 		this.idDst = idDst;
 	}
 

@@ -15,48 +15,48 @@ public class ContactsModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(name = "idOwner")
-	private long idOwner;
+	private Long idOwner;
 	
 	@NotNull
 	@Column(name = "idTarget")
-	private long idTarget;
+	private Long idTarget;
 
 	public ContactsModel() {
 		
 	}
 
-	public ContactsModel(long id, long idOwner, long idTarget) {
+	public ContactsModel(Long id, Long idOwner, Long idTarget) {
 		super();
 		this.id = id;
 		this.idOwner = idOwner;
 		this.idTarget = idTarget;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getIdOwner() {
+	public Long getIdOwner() {
 		return idOwner;
 	}
 
-	public void setIdOwner(long idOwner) {
+	public void setIdOwner(Long idOwner) {
 		this.idOwner = idOwner;
 	}
 
-	public long getIdTarget() {
+	public Long getIdTarget() {
 		return idTarget;
 	}
 
-	public void setIdTarget(long idTarget) {
+	public void setIdTarget(Long idTarget) {
 		this.idTarget = idTarget;
 	}
 	
