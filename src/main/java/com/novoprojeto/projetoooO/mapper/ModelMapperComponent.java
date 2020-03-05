@@ -17,7 +17,6 @@ public class ModelMapperComponent {
 		
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
-		//falta mapear as mensagens do usuario, os contatos 
 		modelMapper.addMappings(
 				new PropertyMap<UserModel, UserDto>(){
 					@Override
@@ -25,7 +24,7 @@ public class ModelMapperComponent {
 						map().setId(source.getId());
 						map().setUserName(source.getUserName());
 						map().setEmail(source.getEmail());
-						map().setPassword(source.getPassword());
+						map().setPassword(null);
 						when(Conditions.isNotNull()).map().getProfile().setId(source.getProfile().getId());
 						skip().setContacts(null);
                     	skip().setMessages(null);
@@ -49,7 +48,7 @@ public class ModelMapperComponent {
 					}
 				});
 		
-		//falta converter o date
+		/*falta converter o date
 		modelMapper.addMappings(
 				new PropertyMap<MessageModel, MessageDto>(){
 					@Override
@@ -79,7 +78,7 @@ public class ModelMapperComponent {
 				});
 		
 		//adicionar a imagem
-		modelMapper.addMappings(
+		/*modelMapper.addMappings(
 				new PropertyMap<ProfileModel, ProfileDto>(){
 					@Override
 					protected void configure() {
@@ -135,7 +134,7 @@ public class ModelMapperComponent {
 						map().setIdTarget(source.getIdTarget());
 					}
 				});
+	}*/
+	
 	}
-	
-	
 }

@@ -1,4 +1,4 @@
-/*package com.novoprojeto.projetoooO.security;
+package com.novoprojeto.projetoooO.security;
 
 import static java.util.Collections.emptyList;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.novoprojeto.projetoooO.model.UserModel;
 import com.novoprojeto.projetoooO.repository.UserRepository;
+
 
 
 @Service
@@ -25,11 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
     public UserDetails loadUserByUsername(String userName) {
         UserModel applicationUser = userRepository.findByUserName(userName);
+        
         if (applicationUser == null) {
             throw new UsernameNotFoundException(userName);
         } 
-        //nao sei o q botar
-        return new User(applicationUser.getUserName(),applicationUser.getPassword(),applicationUser.isStatus(),true,true,true,emptyList());
+        return new User(applicationUser.getUserName(),applicationUser.getPassword(),true,true,true,true,emptyList());
     }
 }
-*/
