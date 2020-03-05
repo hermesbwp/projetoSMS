@@ -9,20 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 	@Configuration
 	public class WebSecurity extends WebSecurityConfigurerAdapter {
-
-		private UserDetailsServiceImpl userDetailsService;
-		private BCryptPasswordEncoder bCryptPasswordEncoder;
-		
-		public WebSecurity(UserDetailsServiceImpl userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder) {
-			super();
-			this.userDetailsService = userDetailsService;
-			this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-		}
-
-		@Override
-	    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-	        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-	    }
 	    
 		@Override
 	    protected void configure(HttpSecurity http) throws Exception {

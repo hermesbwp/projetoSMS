@@ -1,6 +1,7 @@
 package com.novoprojeto.projetoooO.controller;
 import java.util.List;
 
+
 import com.novoprojeto.projetoooO.model.*;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.novoprojeto.projetoooO.service.UserService;
 import com.novoprojeto.projetoooO.dto.*;
 import com.novoprojeto.projetoooO.mapper.*;
-
+import com.novoprojeto.projetoooO.exception.*;
+@RequestMapping(value = "/user")
 @RestController
+
 public class UserController {
 	
 	private UserService userService;
@@ -24,6 +27,38 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET, path = "/teste1")
 	public String blah() {
 		return "papanguh";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<UserDto>> listUsers(){
+		List<UserModel> users = userService.listUsers();
+		
+		if(users.size()==0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<UserDto> usersDto = ModelMapperComponent.modelMapper.map(users, new TypeToken<List<UserDto>>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		return new ResponseEntity<>(usersDto,HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
+		
+		if(userDto == null) {
+			throw new ExceptionBadRequest("Não é possível salvar um usuário nulo");
+		}
+		
+		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		userService.addUser(userModel);
+		
+		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
+		
+		return new ResponseEntity<>(userDto,HttpStatus.OK);
 	}
 	
 	

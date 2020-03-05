@@ -5,7 +5,6 @@ import com.novoprojeto.projetoooO.model.*;
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 	
    UserModel findByUserName(String userName);
-   
    UserModel findByEmail(String email);
 
 }

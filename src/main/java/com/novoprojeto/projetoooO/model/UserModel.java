@@ -1,5 +1,7 @@
 package com.novoprojeto.projetoooO.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,57 +13,45 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "users")
 public class UserModel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	@Size(max = 20)
 	@Column(name = "userName")
 	private String userName;
-	
+
 	@NotNull
 	@Size(max = 200)
 	@Column(name = "password")
 	private String password;
-	
+
 	@NotNull
 	@Size(max = 200)
 	@Column(name = "email")
 	private String email;
-	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy = "user")
-    private ProfileModel userProfile;
-	
-	@OneToMany(fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL,
-			mappedBy = "user")
-	private ContactsModel userContact;
-	
-	//as mensagens do usuario
-	
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private ProfileModel profile;
+
+	@OneToMany
+	private List<UserModel> contacts;
+
+	@OneToMany
+	private List<MessageModel> messages;
+
+	@OneToMany
+	private List<StoryModel> stories;
 
 	public UserModel() {
-		
-	}
 
-	public UserModel(Long id, @Size(max = 20) String userName, @Size(max = 200) String password,
-			@Size(max = 200) String email, ProfileModel userProfile) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.password = password;
-		this.email = email;
-		this.userProfile = userProfile;
 	}
 
 	public Long getId() {
@@ -96,11 +86,37 @@ public class UserModel {
 		this.email = email;
 	}
 
-	public ProfileModel getUserProfile() {
-		return userProfile;
+	public ProfileModel getProfile() {
+		return profile;
 	}
 
-	public void setUserProfile(ProfileModel userProfile) {
-		this.userProfile = userProfile;
+	public void setProfile(ProfileModel profile) {
+		this.profile = profile;
 	}
+
+	public List<UserModel> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<UserModel> contacts) {
+		this.contacts = contacts;
+	}
+
+	public List<MessageModel> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<MessageModel> messages) {
+		this.messages = messages;
+	}
+
+	public List<StoryModel> getStories() {
+		return stories;
+	}
+
+	public void setStories(List<StoryModel> stories) {
+		this.stories = stories;
+	}
+
+	
 }

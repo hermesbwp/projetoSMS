@@ -1,21 +1,22 @@
 package com.novoprojeto.projetoooO.dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StoryDto {
 
 	//falta um atributo
-	private long id;
+	private Long id;
 	private String message;
-	private long idOwner;
-	private Date postDate;
+	private Long idOwner;
+	private LocalDateTime postDate;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getMessage() {
@@ -24,16 +25,16 @@ public class StoryDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public long getIdOwner() {
+	public Long getIdOwner() {
 		return idOwner;
 	}
-	public void setIdOwner(long idOwner) {
+	public void setIdOwner(Long idOwner) {
 		this.idOwner = idOwner;
 	}
-	public Date getPostDate() {
+	public LocalDateTime getPostDate() {
 		return postDate;
 	}
-	public void setPostDate(Date postDate) {
+	public void setPostDate(LocalDateTime postDate) {
 		this.postDate = postDate;
 	}
 }

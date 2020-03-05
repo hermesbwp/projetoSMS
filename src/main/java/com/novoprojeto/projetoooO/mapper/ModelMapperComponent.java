@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
-
 import com.novoprojeto.projetoooO.dto.*;
 import com.novoprojeto.projetoooO.model.*;
 import javax.annotation.PostConstruct;
@@ -15,35 +14,8 @@ public class ModelMapperComponent {
 	
 	@PostConstruct
 	private void configureMapper() {
-		//modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		/*
-		 *  modelMapper.addMappings(
-                new PropertyMap<UserModel, UserDto>() {
-                    @Override
-                    protected void configure() {
-                    	map().setId(source.getId());
-                    	map().setEmail(source.getEmail());
-                    	map().setUserName(source.getUserName());
-                    	map().setFirstName(source.getFirstName());
-                    	map().setLastName(source.getLastName());
-                    	when(Conditions.isNotNull()).using(ModelConverter.convertStatus).map(source.isStatus()).setStatus(null);
-                    	map().getUserProfileDto().setId(source.getUserProfile().getId());
-                    	map().getUserProfileDto().setAddress1(source.getUserProfile().getAddress1());
-                    	map().getUserProfileDto().setAddress2(source.getUserProfile().getAddress2());
-                    	map().getUserProfileDto().setCity(source.getUserProfile().getCity());
-                    	map().getUserProfileDto().setCountry(source.getUserProfile().getCountry());
-                    	using(ModelConverter.fromDateToString).map(source.getUserProfile().getDateOfBirth()).getUserProfileDto().setDateOfBirth(null);
-                    	map().getUserProfileDto().setPhoneNumber(source.getUserProfile().getPhoneNumber());
-                    	map().getUserProfileDto().setState(source.getUserProfile().getState());
-                    	map().getUserProfileDto().setStreet(source.getUserProfile().getStreet());
-                    	map().getUserProfileDto().setZipCode(source.getUserProfile().getZipCode());
-                    	map().setPassword(null);
-                    }
-                });
-		 * */
-		
 		
 		//falta mapear as mensagens do usuario, os contatos 
 		modelMapper.addMappings(
@@ -54,6 +26,11 @@ public class ModelMapperComponent {
 						map().setUserName(source.getUserName());
 						map().setEmail(source.getEmail());
 						map().setPassword(source.getPassword());
+						when(Conditions.isNotNull()).map().getProfile().setId(source.getProfile().getId());
+						skip().setContacts(null);
+                    	skip().setMessages(null);
+                    	skip().setStories(null);
+                    	
 					}
 				});
 		modelMapper.addMappings(
@@ -64,6 +41,10 @@ public class ModelMapperComponent {
 						map().setUserName(source.getUserName());
 						map().setEmail(source.getEmail());
 						map().setPassword(source.getPassword());
+						when(Conditions.isNotNull()).map().getProfile().setId(source.getProfile().getId());
+						skip().setContacts(null);
+                    	skip().setMessages(null);
+                    	skip().setStories(null);
 						
 					}
 				});

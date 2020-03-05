@@ -7,31 +7,31 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageDto {
 	
-	private long id;
-	private long idScr;
-	private long idDst;
+	private Long id;
+	private Long idScr;
+	private Long idDst;
 	private String message;
 	private int statusScr;
 	private int statusDst;
 	private LocalDateTime date;
 	
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public long getIdScr() {
+	public Long getIdScr() {
 		return idScr;
 	}
-	public void setIdScr(long idScr) {
+	public void setIdScr(Long idScr) {
 		this.idScr = idScr;
 	}
-	public long getIdDst() {
+	public Long getIdDst() {
 		return idDst;
 	}
-	public void setIdDst(long idDst) {
+	public void setIdDst(Long idDst) {
 		this.idDst = idDst;
 	}
 	public String getMessage() {

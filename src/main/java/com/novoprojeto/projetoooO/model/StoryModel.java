@@ -35,7 +35,7 @@ public class StoryModel {
 		
 	}
 
-	public StoryModel(long id, String message, long idOwner, LocalDateTime postDate) {
+	public StoryModel(Long id, String message, Long idOwner, LocalDateTime postDate) {
 		super();
 		this.id = id;
 		this.message = message;
