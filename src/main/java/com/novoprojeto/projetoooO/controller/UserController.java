@@ -17,19 +17,17 @@ import com.novoprojeto.projetoooO.service.UserService;
 import com.novoprojeto.projetoooO.dto.*;
 import com.novoprojeto.projetoooO.mapper.*;
 import com.novoprojeto.projetoooO.exception.*;
-@RequestMapping(value = "/user")
-@RestController
 
+@RestController
 public class UserController {
 	
 	private UserService userService;
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/teste1")
-	public String blah() {
-		return "papanguh";
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<List<UserDto>> listUsers(){
 		List<UserModel> users = userService.listUsers();
@@ -42,18 +40,18 @@ public class UserController {
 		return new ResponseEntity<>(usersDto,HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
 		
 		if(userDto == null) {
-			throw new ExceptionBadRequest("Não é possível salvar um usuário nulo");
+			throw new ExceptionBadRequest("Não é possível salvar um usuario nulo!");
 		}
 		
 		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		userService.addUser(userModel);
+		userModel = userService.addUser(userModel);
 		
 		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
@@ -61,5 +59,18 @@ public class UserController {
 		return new ResponseEntity<>(userDto,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/user", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<UserDto> deleteUser(@RequestBody UserDto userDto){
+		if(userDto == null) {
+			throw new ExceptionBadRequest("Não é possível deletar um usuario nulo!");
+		}
+		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
+		userModel = userService.findUserByUserName(userDto.getUserName());
+		
+		userService.deleteUser(userModel.getId());
+		
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
+	}
 	
 }

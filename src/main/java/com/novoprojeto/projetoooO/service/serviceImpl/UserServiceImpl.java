@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserModel addUser(UserModel user) {
 		checkMandatoryFields(user);
-		validate(user);
+	    validate(user);
+		
 		try {
 			user.setPassword(criptoSenha(user.getPassword()));
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
@@ -95,7 +96,7 @@ public class UserServiceImpl implements UserService {
 		validate(user);
 
 	}
-
+/*
 	public void checkRelation(UserModel user) {
 		if (user.getProfile() != null && user.getProfile().getId() != null
 				&& userRepository.findById(user.getProfile().getId()) == null) {
@@ -103,7 +104,7 @@ public class UserServiceImpl implements UserService {
 		} else if (user.getProfile() == null && user.getProfile().getId() == null) {
 			user.setProfile(null);
 		}
-	}
+	}*/
 	
 	public String criptoSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");

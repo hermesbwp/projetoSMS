@@ -38,7 +38,7 @@ public class UserModel {
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne
 	private ProfileModel profile;
 
 	@OneToMany
