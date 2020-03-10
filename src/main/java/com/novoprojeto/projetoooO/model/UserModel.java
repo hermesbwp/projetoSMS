@@ -42,7 +42,7 @@ public class UserModel {
 	private ProfileModel profile;
 
 	@OneToMany
-	private List<UserModel> contacts;
+	private List<ContactsModel> contacts;
 
 	@OneToMany
 	private List<MessageModel> messages;
@@ -94,11 +94,11 @@ public class UserModel {
 		this.profile = profile;
 	}
 
-	public List<UserModel> getContacts() {
+	public List<ContactsModel> getContacts() {
 		return contacts;
 	}
 
-	public void setContacts(List<UserModel> contacts) {
+	public void setContacts(List<ContactsModel> contacts) {
 		this.contacts = contacts;
 	}
 
@@ -117,6 +117,4 @@ public class UserModel {
 	public void setStories(List<StoryModel> stories) {
 		this.stories = stories;
 	}
-
-	
 }

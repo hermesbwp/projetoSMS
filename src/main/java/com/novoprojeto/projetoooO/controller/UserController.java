@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,14 +62,25 @@ public class UserController {
 	
 	@RequestMapping(value = "/user", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<UserDto> deleteUser(@RequestBody UserDto userDto){
-		if(userDto == null) {
-			throw new ExceptionBadRequest("Não é possível deletar um usuario nulo!");
+	public ResponseEntity<UserDto> deleteUser(Long id){
+		
+		userService.deleteUser(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable("id") Long id){
+		if(userDto == null || id == null) {
+			throw new ExceptionBadRequest("Usuário nulo ou o id passado nulo!");
 		}
 		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
-		userModel = userService.findUserByUserName(userDto.getUserName());
+		ModelMapperComponent.modelMapper.validate();
 		
-		userService.deleteUser(userModel.getId());
+		userService.updateUser(userModel);
+		
+		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
+		ModelMapperComponent.modelMapper.validate();
 		
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}

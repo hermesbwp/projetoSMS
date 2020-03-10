@@ -11,10 +11,9 @@ public class MessageDto {
 	private Long idScr;
 	private Long idDst;
 	private String message;
-	private int statusScr;
-	private int statusDst;
+	private boolean statusScr;
+	private boolean statusDst;
 	private LocalDateTime date;
-	
 	
 	public Long getId() {
 		return id;
@@ -40,16 +39,16 @@ public class MessageDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public int getStatusScr() {
+	public boolean isStatusScr() {
 		return statusScr;
 	}
-	public void setStatusScr(int statusScr) {
+	public void setStatusScr(boolean statusScr) {
 		this.statusScr = statusScr;
 	}
-	public int getStatusDst() {
+	public boolean isStatusDst() {
 		return statusDst;
 	}
-	public void setStatusDst(int statusDst) {
+	public void setStatusDst(boolean statusDst) {
 		this.statusDst = statusDst;
 	}
 	public LocalDateTime getDate() {
@@ -58,4 +57,5 @@ public class MessageDto {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-}
+		
+	}

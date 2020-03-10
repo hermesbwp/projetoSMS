@@ -33,35 +33,17 @@ public class MessageModel {
 	@Column(name = "message")
 	private String message;
 	
-	
-	// esse status diz pra quem a mensagem esta visivel
 	@NotNull
 	@Column(name = "statusScr")
-	private int statusScr;
+	private boolean statusScr;
 	
 	@NotNull
 	@Column(name = "statusDst")
-	private int statusDst;
+	private boolean statusDst;
 	
 	@NotNull
 	@Column(name = "date")
 	private LocalDateTime date;
-
-	public MessageModel() {
-		
-	}
-
-	public MessageModel(Long id, Long idScr, Long idDst, @Size(max = 200) String message, int statusScr, int statusDst,
-			LocalDateTime date) {
-		super();
-		this.id = id;
-		this.idScr = idScr;
-		this.idDst = idDst;
-		this.message = message;
-		this.statusScr = statusScr;
-		this.statusDst = statusDst;
-		this.date = date;
-	}
 
 	public Long getId() {
 		return id;
@@ -95,19 +77,19 @@ public class MessageModel {
 		this.message = message;
 	}
 
-	public int getStatusScr() {
+	public boolean isStatusScr() {
 		return statusScr;
 	}
 
-	public void setStatusScr(int statusScr) {
+	public void setStatusScr(boolean statusScr) {
 		this.statusScr = statusScr;
 	}
 
-	public int getStatusDst() {
+	public boolean isStatusDst() {
 		return statusDst;
 	}
 
-	public void setStatusDst(int statusDst) {
+	public void setStatusDst(boolean statusDst) {
 		this.statusDst = statusDst;
 	}
 
@@ -118,4 +100,9 @@ public class MessageModel {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
+
+	public MessageModel() {
+	}
+
+	
 }

@@ -13,7 +13,7 @@ public class UserDto {
 	private String email;
 	private String password;
 	private ProfileDto profile;
-	private List<UserDto> contacts;
+	private List<ContactsDto> contacts;
 	private List<MessageDto> messages;
 	private List<StoryDto> stories;
 	
@@ -48,10 +48,10 @@ public class UserDto {
 	public void setProfile(ProfileDto profile) {
 		this.profile = profile;
 	}
-	public List<UserDto> getContacts() {
+	public List<ContactsDto> getContacts() {
 		return contacts;
 	}
-	public void setContacts(List<UserDto> contacts) {
+	public void setContacts(List<ContactsDto> contacts) {
 		this.contacts = contacts;
 	}
 	public List<MessageDto> getMessages() {
@@ -66,6 +66,4 @@ public class UserDto {
 	public void setStories(List<StoryDto> stories) {
 		this.stories = stories;
 	}
-	
-	
 }

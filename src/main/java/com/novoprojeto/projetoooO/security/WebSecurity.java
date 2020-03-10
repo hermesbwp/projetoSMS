@@ -31,6 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		        .authorizeRequests()
 		        .antMatchers("/h2-console**").permitAll()
 		        .antMatchers("/user**").permitAll()
+		        .antMatchers("/contacts**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

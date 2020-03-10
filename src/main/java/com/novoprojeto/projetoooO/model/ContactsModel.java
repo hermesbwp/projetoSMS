@@ -2,11 +2,14 @@ package com.novoprojeto.projetoooO.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.sun.istack.NotNull;
 
 @Entity
@@ -17,23 +20,16 @@ public class ContactsModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Column(name = "idOwner")
-	private Long idOwner;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_owner_id", nullable = false)
+	private UserModel userOwner;
 	
-	@NotNull
-	@Column(name = "idTarget")
-	private Long idTarget;
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_target_id", nullable = false)
+	private UserModel userTarget;
 
 	public ContactsModel() {
 		
-	}
-
-	public ContactsModel(Long id, Long idOwner, Long idTarget) {
-		super();
-		this.id = id;
-		this.idOwner = idOwner;
-		this.idTarget = idTarget;
 	}
 
 	public Long getId() {
@@ -44,20 +40,22 @@ public class ContactsModel {
 		this.id = id;
 	}
 
-	public Long getIdOwner() {
-		return idOwner;
+	public UserModel getUserOwner() {
+		return userOwner;
 	}
 
-	public void setIdOwner(Long idOwner) {
-		this.idOwner = idOwner;
+	public void setUserOwner(UserModel userOwner) {
+		this.userOwner = userOwner;
 	}
 
-	public Long getIdTarget() {
-		return idTarget;
+	public UserModel getUserTarget() {
+		return userTarget;
 	}
 
-	public void setIdTarget(Long idTarget) {
-		this.idTarget = idTarget;
+	public void setUserTarget(UserModel userTarget) {
+		this.userTarget = userTarget;
 	}
+
+	
 	
 }

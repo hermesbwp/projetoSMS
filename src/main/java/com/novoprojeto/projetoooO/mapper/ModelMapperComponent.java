@@ -47,9 +47,26 @@ public class ModelMapperComponent {
 						
 					}
 				});
-		
-		/*falta converter o date
-		modelMapper.addMappings(
+			
+		modelMapper.addMappings( 
+				new PropertyMap<ContactsModel, ContactsDto>(){
+					@Override
+					protected void configure() {
+						map().setId(source.getId());
+						map().setUserOwner(source.getUserOwner());
+						map().setUserTarget(source.getUserTarget());
+					}
+				});
+		modelMapper.addMappings( 
+				new PropertyMap<ContactsDto, ContactsModel>(){
+					@Override
+					protected void configure() {
+						//map().setId(source.getId());
+						map().setUserOwner(source.getUserOwner());
+						map().setUserTarget(source.getUserTarget());					}
+				});
+		/*
+		 * modelMapper.addMappings(
 				new PropertyMap<MessageModel, MessageDto>(){
 					@Override
 					protected void configure() {
@@ -57,8 +74,8 @@ public class ModelMapperComponent {
 						map().setIdDst(source.getIdDst());
 						map().setIdScr(source.getIdScr());
 						map().setMessage(source.getMessage());
-						map().setStatusDst(source.getStatusDst());
-						map().setStatusScr(source.getStatusScr());
+						map().setStatusDst(source.isStatusDst());
+						map().setStatusScr(source.isStatusScr());
 						map().setDate(source.getDate());
 					}
 				});
@@ -71,14 +88,13 @@ public class ModelMapperComponent {
 						map().setIdDst(source.getIdDst());
 						map().setIdScr(source.getIdScr());
 						map().setMessage(source.getMessage());
-						map().setStatusDst(source.getStatusDst());
-						map().setStatusScr(source.getStatusScr());
+						map().setStatusDst(source.isStatusDst());
+						map().setStatusScr(source.isStatusScr());
 						map().setDate(source.getDate());
 					}
 				});
-		
-		//adicionar a imagem
-		/*modelMapper.addMappings(
+		adicionar a imagem
+		modelMapper.addMappings(
 				new PropertyMap<ProfileModel, ProfileDto>(){
 					@Override
 					protected void configure() {
@@ -92,7 +108,7 @@ public class ModelMapperComponent {
 						map().setId(source.getId());
 					}
 				});
-		//converter o date
+		converter o date
 		modelMapper.addMappings( 
 				new PropertyMap<StoryModel, StoryDto>(){
 					@Override
@@ -116,24 +132,7 @@ public class ModelMapperComponent {
 				});
 		
 		//falta a mensagem
-		modelMapper.addMappings( 
-				new PropertyMap<ContactsModel, ContactsDto>(){
-					@Override
-					protected void configure() {
-						map().setId(source.getId());
-						map().setIdOwner(source.getIdOwner());
-						map().setIdTarget(source.getIdTarget());
-					}
-				});
-		modelMapper.addMappings( 
-				new PropertyMap<ContactsDto, ContactsModel>(){
-					@Override
-					protected void configure() {
-						map().setId(source.getId());
-						map().setIdOwner(source.getIdOwner());
-						map().setIdTarget(source.getIdTarget());
-					}
-				});
+		
 	}*/
 	
 	}

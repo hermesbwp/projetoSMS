@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import com.novoprojeto.projetoooO.repository.ContactsRepository;
 import com.novoprojeto.projetoooO.repository.UserRepository;
 import com.novoprojeto.projetoooO.service.UserService;
 import com.novoprojeto.projetoooO.exception.*;
@@ -17,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	public UserRepository userRepository;
+	@Autowired
+	public ContactsRepository contactRepository;
 
 	@Override
 	public List<UserModel> listUsers() {
@@ -39,6 +43,7 @@ public class UserServiceImpl implements UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return userRepository.save(user);
 	}
 
@@ -96,16 +101,7 @@ public class UserServiceImpl implements UserService {
 		validate(user);
 
 	}
-/*
-	public void checkRelation(UserModel user) {
-		if (user.getProfile() != null && user.getProfile().getId() != null
-				&& userRepository.findById(user.getProfile().getId()) == null) {
-			throw new ExceptionConflict("Perfil não encontrado!");
-		} else if (user.getProfile() == null && user.getProfile().getId() == null) {
-			user.setProfile(null);
-		}
-	}*/
-	
+
 	public String criptoSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
 		byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));

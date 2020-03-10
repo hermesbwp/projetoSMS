@@ -1,13 +1,14 @@
 package com.novoprojeto.projetoooO.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.novoprojeto.projetoooO.model.UserModel;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactsDto {
 	
 	private Long id;
-	private Long idOwner;
-	private Long idTarget;
+	private UserModel userOwner;
+	private UserModel userTarget;
 	
 	public Long getId() {
 		return id;
@@ -15,17 +16,19 @@ public class ContactsDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getIdOwner() {
-		return idOwner;
+	public UserModel getUserOwner() {
+		return userOwner;
 	}
-	public void setIdOwner(Long idOwner) {
-		this.idOwner = idOwner;
+	public void setUserOwner(UserModel userOwner) {
+		this.userOwner = userOwner;
 	}
-	public Long getIdTarget() {
-		return idTarget;
+	public UserModel getUserTarget() {
+		return userTarget;
 	}
-	public void setIdTarget(Long idTarget) {
-		this.idTarget = idTarget;
+	public void setUserTarget(UserModel userTarget) {
+		this.userTarget = userTarget;
 	}
+	
+	
 	
 }
