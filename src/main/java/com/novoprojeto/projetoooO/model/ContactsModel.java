@@ -1,5 +1,7 @@
 package com.novoprojeto.projetoooO.model;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,18 +46,15 @@ public class ContactsModel {
 		return userOwner;
 	}
 
-	public void setUserOwner(UserModel userOwner) {
-		this.userOwner = userOwner;
+	public void setUserOwner(UserModel userModel) {
+		this.userOwner = userModel;
 	}
 
 	public UserModel getUserTarget() {
 		return userTarget;
 	}
 
-	public void setUserTarget(UserModel userTarget) {
-		this.userTarget = userTarget;
+	public void setUserTarget(UserModel userModel) {
+		this.userTarget = userModel;
 	}
-
-	
-	
 }

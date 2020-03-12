@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.novoprojeto.projetoooO.exception.ExceptionBadRequest;
 import com.novoprojeto.projetoooO.model.ContactsModel;
+import com.novoprojeto.projetoooO.model.UserModel;
 import com.novoprojeto.projetoooO.repository.ContactsRepository;
 import com.novoprojeto.projetoooO.repository.UserRepository;
 import com.novoprojeto.projetoooO.service.ContactService;
@@ -25,20 +26,23 @@ public class ContactServiceImpl implements ContactService{
 	return userRepository.findById(idOwner).get().getContacts();	
 	}
 	@Override
-	public ContactsModel addContact(ContactsModel contact) {
-		validarContact(contact);
-		//userRepository.findById(contact.getIdOwner()).get().getContacts().add(contact);
-		
-		return contactsRepository.save(contact);
+	public void addContact(ContactsModel contactModel) {
+
+		validarContact(contactModel.getUserOwner(),contactModel.getUserTarget());
+		contactsRepository.save(contactModel);
 	}
 	
-	public void validarContact(ContactsModel contato){
-		if(userRepository.findById(contato.getUserOwner().getId())==null) {
-			throw new ExceptionBadRequest("Não existe usuário com esse id pra ser contato");
+	public void validarContact(UserModel userOwner, UserModel userTarget){
+		if(userRepository.findById(userOwner.getId())==null) {
+			throw new ExceptionBadRequest("Não existe usuário com esse id pra ser fonte");
 		} 	
-		else if(userRepository.findById(contato.getUserTarget().getId())==null) {
-			throw new ExceptionBadRequest("Não existe usuário com esse id para ser a fonte");
+		else if(userRepository.findById(userTarget.getId()) == null) {
+			throw new ExceptionBadRequest("Não existe usuário com esse id para ser a contato");
 		}
+	}
+	
+	public void verificarUsuario(Long id) {
+		
 	}
 	@Override
 	public void deleteContact(Long id) {

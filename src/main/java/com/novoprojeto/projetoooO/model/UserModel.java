@@ -117,4 +117,5 @@ public class UserModel {
 	public void setStories(List<StoryModel> stories) {
 		this.stories = stories;
 	}
+
 }

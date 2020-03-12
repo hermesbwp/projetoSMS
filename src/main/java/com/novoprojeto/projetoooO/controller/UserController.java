@@ -68,7 +68,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/user{id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable("id") Long id){
 		if(userDto == null || id == null) {
@@ -77,7 +77,7 @@ public class UserController {
 		UserModel userModel = ModelMapperComponent.modelMapper.map(userDto, new TypeToken<UserModel>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();
 		
-		userService.updateUser(userModel);
+		userService.updateUser(userModel, id);
 		
 		userDto = ModelMapperComponent.modelMapper.map(userModel, new TypeToken<UserDto>() {}.getType());
 		ModelMapperComponent.modelMapper.validate();

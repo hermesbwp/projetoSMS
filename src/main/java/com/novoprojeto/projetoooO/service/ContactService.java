@@ -8,6 +8,6 @@ public interface ContactService {
 
 	List<ContactsModel> listContacts();
 	List<ContactsModel> listContactsUser(Long idOwner);
-	ContactsModel addContact(ContactsModel contact);
+	void addContact(ContactsModel contactsModel);
 	void deleteContact(Long id);
 }

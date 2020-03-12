@@ -25,7 +25,7 @@ import com.novoprojeto.projetoooO.service.UserService;
 public class ContactController {
 	private UserService userService;
 	private ContactService contactsService;
-	
+
 	public ContactController(UserService userService, ContactService contactsService) {
 		this.userService = userService;
 		this.contactsService = contactsService;
@@ -33,32 +33,33 @@ public class ContactController {
 
 	@RequestMapping(value = "/contacts", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<List<ContactsDto>> listUsers(){
+	public ResponseEntity<List<ContactsDto>> listUsers() {
 		List<ContactsModel> contacts = contactsService.listContacts();
-		
-		if(contacts.size()==0) {
+
+		if (contacts.size() == 0) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		List<ContactsDto> contactsDto = ModelMapperComponent.modelMapper.map(contacts, new TypeToken<List<UserDto>>() {}.getType());
+		List<ContactsDto> contactsDto = ModelMapperComponent.modelMapper.map(contacts, new TypeToken<List<UserDto>>() {
+		}.getType());
 		ModelMapperComponent.modelMapper.validate();
-		return new ResponseEntity<>(contactsDto,HttpStatus.OK);
+		return new ResponseEntity<>(contactsDto, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/contacts", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ContactsDto> addContact(@RequestBody ContactsDto contactDto){
-		if(contactDto == null) {
-			throw new ExceptionBadRequest("Não é possível salvar um contato nulo!");
-		}
-		ContactsModel contactModel = ModelMapperComponent.modelMapper.map(contactDto, new TypeToken<ContactsModel>() {}.getType());
-		ModelMapperComponent.modelMapper.validate();
+	public ResponseEntity<Object> addContact(@RequestBody ContactsDto contactDto) {
+		System.out.println(contactDto.getIdOwner());
+		System.out.println(contactDto.getIdTarget());
 		
-		contactModel = contactsService.addContact(contactModel);
+		ContactsModel contactModel = ModelMapperComponent.modelMapper.map(contactDto, new TypeToken<ContactsDto>() {}.getType());
 		
-		contactDto = ModelMapperComponent.modelMapper.map(contactModel, new TypeToken<ContactsDto>() {}.getType());
-		ModelMapperComponent.modelMapper.validate();
+		UserModel userOwner = userService.findUserById(contactDto.getIdOwner());
+		UserModel userTarget = userService.findUserById(contactDto.getIdTarget());
 		
-		return new ResponseEntity<>(contactDto,HttpStatus.OK);
+		contactModel.setUserOwner(userOwner);
+		contactModel.setUserTarget(userTarget);
+		
+		contactsService.addContact(contactModel);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 }
-

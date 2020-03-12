@@ -53,17 +53,18 @@ public class ModelMapperComponent {
 					@Override
 					protected void configure() {
 						map().setId(source.getId());
-						map().setUserOwner(source.getUserOwner());
-						map().setUserTarget(source.getUserTarget());
+						map().setIdTarget(source.getUserTarget().getId());
+						map().setIdOwner(source.getUserOwner().getId());
 					}
 				});
 		modelMapper.addMappings( 
 				new PropertyMap<ContactsDto, ContactsModel>(){
 					@Override
 					protected void configure() {
-						//map().setId(source.getId());
-						map().setUserOwner(source.getUserOwner());
-						map().setUserTarget(source.getUserTarget());					}
+						map().setId(source.getId());
+						map().getUserOwner().setId(source.getIdOwner());
+						map().getUserTarget().setId(source.getIdTarget());				
+						}
 				});
 		/*
 		 * modelMapper.addMappings(

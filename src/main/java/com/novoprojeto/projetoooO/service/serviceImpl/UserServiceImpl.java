@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(Long id) {
-
 		Optional<UserModel> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			userRepository.deleteById(id);
@@ -58,11 +57,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserModel updateUser(UserModel user) {
-		if (user.getId() == null) {
-			throw new ExceptionBadRequest("Necessário o id do usuário que será atualizado");
+	public UserModel updateUser(UserModel user,Long id) {
+		if (userRepository.findById(id) == null) {
+			throw new ExceptionBadRequest("O não existe usuário com esse id");
 		}
 		checkIntegrity(user);
+		try {
+			user.setPassword(criptoSenha(user.getPassword()));
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		user.setId(id);
 		return userRepository.save(user);
 	}
 
@@ -112,6 +118,19 @@ public class UserServiceImpl implements UserService {
 		}
 		 String senhaCryp = hexString.toString();
 		 return senhaCryp;
+	}
+
+	@Override
+	public UserModel findUserById(Long id) {
+		// TODO Auto-generated method stub
+		Optional<UserModel> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			userRepository.findById(id);
+		}else {
+			throw new ExceptionNotFound("Usuário com esse id não foi encontrado no banco");
+		}
+		
+		return user.get();
 	}
 	
 }
